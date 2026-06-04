@@ -8,6 +8,8 @@
 
 > **A visual performance benchmark demonstrating the power of Redis caching vs PostgreSQL raw queries on 500,000 sales records.**
 
+![Dashboard Preview](./dashboard.png)
+
 ---
 
 ## 🎯 Project Overview (วัตถุประสงค์ของโปรเจกต์)
