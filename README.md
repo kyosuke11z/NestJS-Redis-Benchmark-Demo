@@ -9,10 +9,10 @@
 > **A visual performance benchmark demonstrating the power of Redis caching vs PostgreSQL raw queries on 500,000 sales records.**
 
 ### ⚡ Live Benchmark Demo (ภาพเคลื่อนไหวขณะทำ Benchmark)
-![Performance Demo](./demo.webp)
+![Performance Demo](./benchmark_demo.webp)
 
 ### 📊 Dashboard Overview (โครงสร้างแดชบอร์ด)
-![Dashboard Preview](./dashboard.png)
+![Dashboard Preview](./dashboard_overview.png)
 
 ---
 
