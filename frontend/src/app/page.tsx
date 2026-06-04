@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [redisLoading, setRedisLoading] = useState<boolean>(false);
   const [isResetting, setIsResetting] = useState<boolean>(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002/api';
 
   const checkHealth = async () => {
     setPostgresStatus('Checking');
@@ -112,7 +112,7 @@ export default function Dashboard() {
   const globalLoading = dbLoading || redisLoading;
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8 md:px-8">
+    <main className="max-w-6xl mx-auto px-6 py-8 md:py-12">
       {/* Upper Navigation & Status Indicators */}
       <Header
         postgresStatus={postgresStatus}
@@ -121,6 +121,16 @@ export default function Dashboard() {
         isResetting={isResetting}
         onRefreshHealth={checkHealth}
       />
+
+      {/* Professional SaaS Hero Header Section */}
+      <section className="mb-10 text-left border-b border-white/5 pb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          Sales Analytics Latency Benchmark
+        </h1>
+        <p className="text-sm md:text-base text-text-secondary mt-2.5 max-w-3xl leading-relaxed">
+          Evaluate backend system response times by comparing raw SQL analytical aggregations directly executed on **PostgreSQL** against an in-memory readout cache layer managed with **Redis**. The database contains **500,000** mock sales transaction rows to simulate a realistic production workload.
+        </p>
+      </section>
 
       {/* Central Arena Container */}
       <Arena
@@ -170,8 +180,8 @@ export default function Dashboard() {
       <BenchmarkChart data={dashboardData} loading={globalLoading} />
 
       {/* Footer Details */}
-      <footer className="mt-12 text-center text-[10px] text-text-muted font-mono uppercase tracking-widest border-t border-white/5 pt-6">
-        NestJS Redis Performance Benchmark Demo • Created by Allen
+      <footer className="mt-16 text-center text-xs text-text-muted border-t border-white/5 pt-8 font-mono">
+        NestJS Redis Performance Benchmark Demo • Developed by Allen
       </footer>
     </main>
   );

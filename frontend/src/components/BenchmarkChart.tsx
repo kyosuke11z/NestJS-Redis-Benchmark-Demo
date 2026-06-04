@@ -31,18 +31,18 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
   }, []);
 
   if (!mounted) {
-    return <div className="h-[420px] w-full shimmer-bg rounded-2xl border border-white/5" />;
+    return <div className="h-[400px] w-full shimmer-bg rounded-xl border border-[#222a3b]" />;
   }
 
   if (loading) {
     return (
-      <div className="glass-card p-6 h-[420px] flex flex-col justify-between mt-8">
+      <div className="glass-card p-6 h-[400px] flex flex-col justify-between mt-8">
         <div className="flex gap-4">
-          <div className="h-9 w-32 rounded shimmer-bg" />
-          <div className="h-9 w-32 rounded shimmer-bg" />
-          <div className="h-9 w-32 rounded shimmer-bg" />
+          <div className="h-8 w-24 rounded-lg shimmer-bg" />
+          <div className="h-8 w-24 rounded-lg shimmer-bg" />
+          <div className="h-8 w-24 rounded-lg shimmer-bg" />
         </div>
-        <div className="h-[300px] w-full rounded shimmer-bg" />
+        <div className="h-[280px] w-full rounded-lg shimmer-bg" />
       </div>
     );
   }
@@ -50,9 +50,9 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
   if (!data) {
     return (
       <div className="glass-card p-8 text-center border-dashed border-white/10 flex flex-col items-center justify-center min-h-[300px] mt-8">
-        <p className="text-text-secondary text-sm font-semibold mb-2 font-mono">Telemetry Data Empty</p>
-        <p className="text-xs text-text-muted max-w-sm">
-          Run PostgreSQL or Redis cache queries to populate the analytic metrics and display interactive Recharts.
+        <p className="text-text-secondary text-sm font-semibold mb-2">Metrics Data Empty</p>
+        <p className="text-xs text-text-muted max-w-sm leading-relaxed">
+          Execute either PostgreSQL or Redis queries to fetch sales data and render comparison reports.
         </p>
       </div>
     );
@@ -92,14 +92,14 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
   const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#0f1524] border border-white/10 p-3.5 rounded-xl shadow-2xl backdrop-blur-md">
+        <div className="bg-[#111520] border border-[#222a3b] p-3 rounded-lg shadow-xl">
           <p className="text-[10px] font-bold text-gray-400 mb-1">{label}</p>
-          <p className="text-sm font-black text-emerald-400 font-mono">
+          <p className="text-sm font-bold text-emerald-400 font-mono">
             {formatCurrency(payload[0].value)}
           </p>
           {payload[0].payload.items && (
-            <p className="text-[10px] text-gray-400 font-semibold mt-0.5 font-mono">
-              Items: {new Intl.NumberFormat().format(payload[0].payload.items)}
+            <p className="text-[9px] text-gray-400 font-semibold mt-0.5 font-mono">
+              Items Sold: {new Intl.NumberFormat().format(payload[0].payload.items)}
             </p>
           )}
         </div>
@@ -109,51 +109,64 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
   };
 
   return (
-    <div className="glass-card p-6 flex flex-col mt-8 min-h-[440px]">
+    <div className="glass-card p-8 flex flex-col mt-8 min-h-[440px]">
       
-      {/* Tab Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/5 pb-4 mb-6">
+      {/* SaaS Segment Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/5 pb-5 mb-6">
         <div>
-          <h3 className="text-sm font-black uppercase tracking-wider text-text-secondary">
-            Sales Analysis Analytics
-          </h3>
-          <p className="text-[10px] text-text-muted mt-0.5">
-            Aggregated dashboard visualization for 500k Postgres records
+          <h4 className="text-base font-bold text-white">
+            Aggregated Report Analysis
+          </h4>
+          <p className="text-xs text-text-secondary mt-0.5">
+            Analytic breakdown compiled over the 500,000 transaction dataset.
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
-          {/* Categories Tab */}
+        {/* Clean Segment Pill Switch */}
+        <div className="flex bg-[#0d111a] p-1 rounded-lg border border-[#222a3b] gap-1">
+          {/* Categories Segment */}
           <button
             onClick={() => setActiveTab('category')}
-            className={`chart-tab-button flex items-center gap-2 ${activeTab === 'category' ? 'active' : ''}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer ${
+              activeTab === 'category'
+                ? 'bg-[#1b212f] text-white border border-[#2c374d]'
+                : 'text-text-secondary hover:text-white'
+            }`}
           >
             <BarChart3 className="w-3.5 h-3.5" />
             Categories
           </button>
           
-          {/* Timeline Tab */}
+          {/* Timeline Segment */}
           <button
             onClick={() => setActiveTab('monthly')}
-            className={`chart-tab-button flex items-center gap-2 ${activeTab === 'monthly' ? 'active' : ''}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer ${
+              activeTab === 'monthly'
+                ? 'bg-[#1b212f] text-white border border-[#2c374d]'
+                : 'text-text-secondary hover:text-white'
+            }`}
           >
             <TrendingUp className="w-3.5 h-3.5" />
-            Monthly Timeline
+            Timeline
           </button>
 
-          {/* Region Tab */}
+          {/* Region Segment */}
           <button
             onClick={() => setActiveTab('region')}
-            className={`chart-tab-button flex items-center gap-2 ${activeTab === 'region' ? 'active' : ''}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer ${
+              activeTab === 'region'
+                ? 'bg-[#1b212f] text-white border border-[#2c374d]'
+                : 'text-text-secondary hover:text-white'
+            }`}
           >
             <Globe className="w-3.5 h-3.5" />
-            Geographies
+            Regions
           </button>
         </div>
       </div>
 
       {/* Render Selected Chart Panel */}
-      <div className="h-[300px] w-full flex-grow">
+      <div className="h-[280px] w-full flex-grow">
         
         {activeTab === 'category' && (
           <ResponsiveContainer width="100%" height="100%">
@@ -161,7 +174,7 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
               data={data.salesByCategory}
               margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.01)" vertical={false} />
               <XAxis
                 dataKey="category"
                 stroke="rgba(255,255,255,0.3)"
@@ -180,8 +193,8 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
               <Bar 
                 dataKey="value" 
                 fill="#3b82f6" 
-                radius={[6, 6, 0, 0]}
-                maxBarSize={30}
+                radius={[4, 4, 0, 0]}
+                maxBarSize={28}
               />
             </BarChart>
           </ResponsiveContainer>
@@ -194,12 +207,12 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
               margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
             >
               <defs>
-                <linearGradient id="glowingGreen" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.15} />
+                <linearGradient id="cleanEmerald" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.1} />
                   <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.01)" vertical={false} />
               <XAxis
                 dataKey="month"
                 stroke="rgba(255,255,255,0.3)"
@@ -219,9 +232,9 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
                 type="monotone"
                 dataKey="value"
                 stroke="#10b981"
-                strokeWidth={2.5}
+                strokeWidth={2}
                 fillOpacity={1}
-                fill="url(#glowingGreen)"
+                fill="url(#cleanEmerald)"
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -234,7 +247,7 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
               data={data.salesByRegion}
               margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" horizontal={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.01)" horizontal={false} />
               <XAxis
                 type="number"
                 stroke="rgba(255,255,255,0.3)"
@@ -256,8 +269,8 @@ export const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ data, loading })
               <Bar 
                 dataKey="value" 
                 fill="#f59e0b" 
-                radius={[0, 6, 6, 0]}
-                maxBarSize={18}
+                radius={[0, 4, 4, 0]}
+                maxBarSize={16}
               />
             </BarChart>
           </ResponsiveContainer>

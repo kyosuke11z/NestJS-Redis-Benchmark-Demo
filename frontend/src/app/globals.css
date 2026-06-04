@@ -1,27 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --bg-primary: #05070a;
-  --bg-secondary: #0a0d14;
-  --bg-card: rgba(10, 15, 28, 0.7);
-  --border-color: rgba(255, 255, 255, 0.05);
-  --border-glow: rgba(255, 255, 255, 0.08);
+  --bg-primary: #090b11;
+  --bg-secondary: #111520;
+  --bg-card: #151a26;
+  --border-color: #222a3b;
+  --border-hover: #333f56;
   
-  --text-primary: #f9fafb;
+  --text-primary: #f3f4f6;
   --text-secondary: #9ca3af;
-  --text-muted: #4b5563;
+  --text-muted: #6b7280;
 
   --color-postgres: #ef4444;
-  --color-postgres-glow: rgba(239, 68, 68, 0.2);
-  --color-postgres-hover: #f87171;
+  --color-postgres-bg: rgba(239, 68, 68, 0.08);
+  --color-postgres-hover: #dc2626;
 
   --color-redis: #10b981;
-  --color-redis-glow: rgba(16, 185, 129, 0.2);
-  --color-redis-hover: #34d399;
+  --color-redis-bg: rgba(16, 185, 129, 0.08);
+  --color-redis-hover: #059669;
 
   --color-accent: #3b82f6;
-  --color-accent-glow: rgba(59, 130, 246, 0.15);
+  --color-accent-bg: rgba(59, 130, 246, 0.08);
   
   --font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-timer: var(--font-orbitron), monospace;
 }
 
 * {
@@ -36,15 +39,8 @@ body {
   font-family: var(--font-family);
   overflow-x: hidden;
   min-height: 100vh;
-  /* Premium dashboard grid overlay + glowing flares */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px),
-    radial-gradient(circle at 5% 10%, rgba(239, 68, 68, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 95% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.02) 0%, transparent 60%);
-  background-size: 24px 24px, 24px 24px, 100% 100%, 100% 100%, 100% 100%;
-  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom Scrollbars */
@@ -56,99 +52,58 @@ body {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 9px;
+  background: var(--border-color);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
 
-/* Glassmorphism Card Utility */
+/* SaaS Card Design */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 .glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.8);
-  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Telemetry Logs Panel Console */
-.telemetry-console {
-  background-color: #030508;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 11px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 12px;
-  height: 110px;
-  overflow-y: auto;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.telemetry-line {
-  line-height: 1.6;
-  white-space: nowrap;
-  animation: typeIn 0.1s ease-out forwards;
-}
-
-@keyframes typeIn {
-  from { opacity: 0; transform: translateX(-4px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* Chronometer Text font mapping */
+/* Latency & Timers */
 .timer-text {
-  font-family: var(--font-timer);
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 /* Tabs styles */
 .chart-tab-button {
   background: transparent;
   color: var(--text-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
   padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 550;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease-in-out;
 }
 
 .chart-tab-button:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
   color: #fff;
+  border-color: var(--text-muted);
 }
 
 .chart-tab-button.active {
-  background: rgba(59, 130, 246, 0.08);
-  color: #60a5fa;
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.1);
-}
-
-/* Toggles specifically colored */
-.chart-tab-button.active.tab-postgres {
-  background: rgba(239, 68, 68, 0.08);
-  color: #f87171;
-  border-color: rgba(239, 68, 68, 0.3);
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.1);
-}
-
-.chart-tab-button.active.tab-redis {
-  background: rgba(16, 185, 129, 0.08);
-  color: #34d399;
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.1);
+  background: #fff;
+  color: var(--bg-primary);
+  border-color: #fff;
+  font-weight: 600;
 }
 
 /* Animations */
@@ -161,31 +116,11 @@ body {
   animation: spin 1s linear infinite;
 }
 
-@keyframes pulse-postgres {
-  0%, 100% { box-shadow: 0 0 15px rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.2); }
-  50% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); border-color: rgba(239, 68, 68, 0.5); }
+@keyframes pulse-light {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
-@keyframes pulse-redis {
-  0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.2); }
-  50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.4); border-color: rgba(16, 185, 129, 0.5); }
-}
-
-.glow-postgres.active {
-  animation: pulse-postgres 2s infinite ease-in-out;
-}
-
-.glow-redis.active {
-  animation: pulse-redis 2s infinite ease-in-out;
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.shimmer-bg {
-  background: linear-gradient(90deg, #0d121f 25%, #182238 37%, #0d121f 63%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s infinite linear;
+.pulse-indicator {
+  animation: pulse-light 2s infinite ease-in-out;
 }
