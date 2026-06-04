@@ -1,0 +1,22 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Sale {
+  id          String   @id @default(uuid())
+  productName String
+  category    String
+  amount      Float
+  quantity    Int
+  soldAt      DateTime
+  region      String
+
+  @@index([category])
+  @@index([soldAt])
+  @@index([region])
+}

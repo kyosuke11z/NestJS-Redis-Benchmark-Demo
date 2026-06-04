@@ -1,0 +1,33 @@
+{
+  "name": "nestjs-redis-benchmark-demo-root",
+  "version": "1.0.0",
+  "description": "Root Orchestrator for NestJS + Redis + PostgreSQL performance benchmark demo",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "lint:backend": "npm run lint --prefix backend",
+    "lint:frontend": "npm run lint --prefix frontend",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "format:backend": "npm run format --prefix backend",
+    "format:frontend": "prettier --write \"frontend/src/**/*.{ts,tsx,css}\"",
+    "format": "npm run format:backend && npm run format:frontend",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:build": "docker compose up --build -d"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
+    "prettier": "^3.3.1"
+  },
+  "lint-staged": {
+    "backend/src/**/*.ts": [
+      "npm run lint --prefix backend",
+      "prettier --write"
+    ],
+    "frontend/src/**/*.{ts,tsx}": [
+      "npm run lint --prefix frontend",
+      "prettier --write"
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+:root {
+  --bg-primary: #07090e;
+  --bg-secondary: #0d111a;
+  --bg-card: rgba(15, 22, 36, 0.65);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-glow: rgba(255, 255, 255, 0.1);
+  
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  --color-postgres: #ff3355;
+  --color-postgres-glow: rgba(255, 51, 85, 0.25);
+  --color-postgres-hover: #ff4d6a;
+
+  --color-redis: #10b981;
+  --color-redis-glow: rgba(16, 185, 129, 0.25);
+  --color-redis-hover: #059669;
+
+  --color-accent: #3b82f6;
+  --color-accent-glow: rgba(59, 130, 246, 0.25);
+  
+  --font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-timer: var(--font-orbitron), monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 51, 85, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.02) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Glassmorphism Card Utility */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Timer styles */
+.timer-text {
+  font-family: var(--font-timer);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes pulse-postgres {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--color-postgres-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 51, 85, 0.5);
+  }
+}
+
+@keyframes pulse-redis {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--color-redis-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.glow-postgres {
+  box-shadow: 0 0 15px var(--color-postgres-glow);
+}
+
+.glow-postgres.active {
+  animation: pulse-postgres 2s infinite;
+}
+
+.glow-redis {
+  box-shadow: 0 0 15px var(--color-redis-glow);
+}
+
+.glow-redis.active {
+  animation: pulse-redis 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, #182235 37%, var(--bg-secondary) 63%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
